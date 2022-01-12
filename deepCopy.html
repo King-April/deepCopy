@@ -2,49 +2,48 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-  <script>
+    <script>
+        // 年轻人 请开始你的表演
+        // 深拷贝拷贝多层, 每一级别的数据都会拷贝.
+        var obj = {
+            id: 1,
+            name: 'andy',
+            msg: {
+                age: 18
+            },
+            color: ['pink', 'red']
+        };
 
-    // 年轻人 请开始你的表演
-    // 深拷贝拷贝多层, 每一级别的数据都会拷贝.
-    var obj = {
-      id: 1,
-      name: 'andy',
-      msg: {
-        age: 18
-      },
-      color: ['pink', 'red']
-    };
+        var q1 = {}
 
-    var o = {}
+        // 递归--> 在函数内部调用函数
+        function fn(newobj, oldobj) {
+            for (var k in oldobj) {
+                let item = oldobj[k]
+                    // console.log(item);
+                    // k是属性名，item是属性值
+                if (item instanceof Array) {
+                    newobj[k] = []
+                    fn(newobj[k], item)
+                } else if (item instanceof Object) {
+                    newobj[k] = {}
+                    fn(newobj[k], item)
+                } else {
+                    newobj[k] = item
+                }
 
-    // 递归--> 在函数内部调用函数
-    function fn(newobj,oldobj){
-      for(var k in oldobj){
-        let item = oldobj[k]
-        // console.log(item);
-        // k是属性名，item是属性值
-        if(item instanceof Array){
-          newobj[k]  = []
-          fn(newobj[k],item)
-        }else if(item instanceof Object){
-          newobj[k]  = {}
-          fn(newobj[k],item)
-        }else{
-          newobj[k] = item
+            }
         }
-       
-      }
-    }
-    fn(o,obj)
-    console.log(o);
-  </script>
+        fn(q1, obj)
+        console.log(q1);
+    </script>
 </body>
 
 </html>
